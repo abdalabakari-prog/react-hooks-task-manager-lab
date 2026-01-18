@@ -1,25 +1,33 @@
-import React, { useState, useId, useContext } from "react";
+import { useState, useContext, useId } from "react";
 import { TaskContext } from "../context/TaskContext";
 
 function TaskForm() {
-  const [taskName, setTaskName] = useState("");
+  const [text, setText] = useState("");
+  const { addTask } = useContext(TaskContext);
+  const id = useId();
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (taskName.trim() === "") return;
-    setTaskName("");
-  }
+    if (text.trim()) {
+      addTask({
+        text: text,
+        completed: false,
+      });
+      setText("");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>New Task:</label>
+      <label htmlFor={id}>Add Task:</label>
       <input
+        id={id}
         type="text"
-        value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}
-        placeholder="Add a new task..."
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Enter a task"
       />
-      <button type="submit">Add Task</button>
+      <button type="submit">Add</button>
     </form>
   );
 }
