@@ -6,13 +6,13 @@ export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/tasks")
+    fetch("http://localhost:6001/tasks")
       .then((res) => res.json())
       .then((data) => setTasks(data));
   }, []);
 
   const addTask = (newTask) => {
-    fetch("http://localhost:3001/tasks", {
+    fetch("http://localhost:6001/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export function TaskProvider({ children }) {
     const task = tasks.find((t) => t.id === id);
     const updatedTask = { ...task, completed: !task.completed };
 
-    fetch(`http://localhost:3001/tasks/${id}`, {
+    fetch(`http://localhost:6001/tasks/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
