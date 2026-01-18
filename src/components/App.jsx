@@ -1,18 +1,16 @@
-import { useContext } from "react";
-import TaskForm from "./TaskForm";
-import TaskList from "./TaskList";
-import SearchBar from "./SearchBar";
+import React, { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
+import TaskForm from "./TaskForm";
+import SearchBar from "./SearchBar";
 
 function App() {
   const { tasks } = useContext(TaskContext);
 
   return (
-    <div className="app">
+    <div>
       <h1>Task Manager</h1>
       <TaskForm />
       <SearchBar />
-      <TaskList />
     </div>
   );
 }
